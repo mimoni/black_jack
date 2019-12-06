@@ -10,4 +10,4 @@ require_relative 'classes/dealer'
 require_relative 'classes/interface'
 require_relative 'classes/game'
 
-Game.new.run
+Game.new(Interface).run

@@ -3,12 +3,12 @@
 class Game
   BET_SIZING = 10
 
-  def initialize
+  def initialize(interface)
     @deck = Deck.new
     @dealer = Dealer.new
     @player = Player.new
     @players = [@player, @dealer]
-    @interface = Interface.new(@players)
+    @interface = interface.new(@players)
     @bank = 0
   end
 
