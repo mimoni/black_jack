@@ -7,7 +7,7 @@ require_relative 'classes/bank'
 require_relative 'classes/user'
 require_relative 'classes/player'
 require_relative 'classes/dealer'
-require_relative 'classes/view'
+require_relative 'classes/interface'
 require_relative 'classes/game'
 
 Game.new.run

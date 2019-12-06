@@ -2,13 +2,19 @@
 
 class Deck
   def initialize
-    @cards = %w[♠ ♥ ♣ ♦].flat_map do |suit|
-      %w[2 3 4 5 6 7 8 9 10 В Д К Т].map do |value|
-        Card.new(suit, value)
+    @cards = []
+    generate_cards
+  end
+
+  def generate_cards
+    Card::SUITS.each do |suit|
+      Card::CARDS.each do |value|
+        @cards << Card.new(suit, value)
       end
     end
 
     @cards.shuffle!
+    pp @cards
   end
 
   def size

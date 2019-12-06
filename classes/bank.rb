@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Bank
-  def initialize(balance = 20)
+  def initialize(balance = 100)
     @balance = balance
   end
 

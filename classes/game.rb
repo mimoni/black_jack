@@ -8,22 +8,22 @@ class Game
     @dealer = Dealer.new
     @player = Player.new
     @players = [@player, @dealer]
-    @view = View.new(@players)
+    @interface = Interface.new(@players)
     @bank = 0
   end
 
   def run
-    @player.name = take_player_name
+    @player.name = @interface.take_player_name
     loop do
       prepare_cards
       betting
-      @view.show_table
+      @interface.show_table
       gameplay
       winner = counting_results
       give_reward(winner)
-      @view.show_result(winner)
+      @interface.show_result(winner)
       return if zero_balance?
-      return unless play_again?
+      return unless @interface.play_again?
     end
   end
 
@@ -49,7 +49,7 @@ class Game
       end
     end
     open_all_cart
-    @view.show_table
+    @interface.show_table
   end
 
   def open_all_cart
@@ -75,18 +75,12 @@ class Game
       winner.balance.deposit(@bank)
     end
     @bank = 0
-    @view.show_table
-  end
-
-  def play_again?
-    puts ''
-    print 'Сыграть еще раз? (y/n): '
-    gets.chomp == 'y'
+    @interface.show_table
   end
 
   def zero_balance?
     player = @players.find { |item| item.balance.zero? }
-    puts "\nУ #{player.name.upcase} закончились деньги" if player
+    @interface.show_loser(player) if player
     !player.nil?
   end
 
@@ -98,7 +92,7 @@ class Game
     if player.is_a? Dealer
       player.choice_action
     else
-      @view.choice(player)
+      @interface.choice(player)
     end
   end
 
@@ -107,10 +101,5 @@ class Game
       player.balance.withdraw(BET_SIZING)
       @bank += BET_SIZING
     end
-  end
-
-  def take_player_name
-    print 'Введите своё имя: '
-    gets.chomp
   end
 end

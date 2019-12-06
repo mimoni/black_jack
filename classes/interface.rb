@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class View
+class Interface
   def initialize(players)
     @players = players
   end
@@ -28,6 +28,21 @@ class View
     puts ''
     puts 'Результат: ничья' if winner.nil?
     puts "Результат: выиграл #{winner.name.upcase}" if winner
+  end
+
+  def take_player_name
+    print 'Введите своё имя: '
+    gets.chomp
+  end
+
+  def play_again?
+    puts ''
+    print 'Сыграть еще раз? (y/n): '
+    gets.chomp == 'y'
+  end
+
+  def show_loser(player)
+    puts "\nУ #{player.name.upcase} закончились деньги"
   end
 
   private
